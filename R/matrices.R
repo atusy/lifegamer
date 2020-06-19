@@ -4,7 +4,7 @@ pad <- function(x, top, right, bottom, left) {
     cbind,
     c(
       zeros(left),
-      do.call(rbind, c(zeros(top), list(x), zeros(bottom))),
+      list(do.call(rbind, c(zeros(top), list(x), zeros(bottom)))),
       zeros(right)
     )
   )
@@ -51,5 +51,5 @@ diehard <- pad(
       1, 1, 1
     ), ncol = 3, byrow = TRUE)
   ),
-  5L, 5L, 15L, 7L
+  5L, 5L, 17L, 7L
 )
