@@ -1,23 +1,28 @@
+#' @importFrom ggplot2 autoplot
 #' @export
 ggplot2::autoplot
 
 .data <- rlang::.data
 
 #' @export
-autoplot.lifegame <- function(x, ...) {
-  ggplot2::ggplot(tidy_lifegame(x, n = 0)) +
-    ggplot2::aes(.data$x, .data$y, fill = .data$survive) +
+autoplot.lifegame <- function(x, generation = NULL, ...) {
+  ggplot2::ggplot(x[x$generation == max(x$generation), ]) +
+    ggplot2::aes(.data$x, .data$y, fill = .data$life) +
     ggplot2::geom_raster() +
     ggplot2::coord_fixed()
 }
 
+#' @export
+plot.lifegame <- function(x, ...) {
+  print(autoplot.lifegame(x, ...))
+}
+
+#' @export
 animate <- function(x) {
-  df <- attr(x, 'results')
-  df$n <- max(df$n) - df$n
-  ggplot2::ggplot(df) +
-    ggplot2::aes(.data$x, .data$y, fill = .data$survive) +
+  ggplot2::ggplot(x) +
+    ggplot2::aes(.data$x, .data$y, fill = .data$life) +
     ggplot2::geom_raster() +
     ggplot2::coord_fixed() +
-    #gganimate::transition_states(n)
-    ggplot2::facet_wrap(~ n)
+    #gganimate::transition_states(generation)
+    ggplot2::facet_wrap(~ generation)
 }

@@ -2,36 +2,61 @@ first_gen <- function(nrow=10, ncol=10, p = 0.4) {
   matrix(1 * (runif(nrow * ncol) > (1 - p)), nrow = nrow, ncol = ncol)
 }
 
-lifegame <- function(input=first_gen(), n = 1, ...) {
+update_class <- function(x, n) {
+  class(x) <- c(c("continue", "end")[c(n > 0L, TRUE)][1L], "matrix")
+  x
+}
+
+#' Lifegame
+#'
+#' @param input An matrix composed of `0L` and `1L`.
+#' @param n Number of generations to calculate.
+#' @param ... Other parameters passed down to methods
+#'
+#' @return A lifegame class `data.frame` with 4 integer columns.
+#'  The `x` and `y` columns indicate their coordinates.
+#'  The `generation` column indicates n-th generation of lifegame.
+#'  The `life` column indicates if the cell is dead (`0`) or alive (`1L`).
+#'
+#' @export
+lifegame <- function(input = first_gen(), n = 1, ...) {
   UseMethod("lifegame")
 }
 
-lifegame.default <- function(input=first_gen(), n = 1, ...) {
-  n <- as.integer(n)
-  class(input) <- c(n, "integer", "matrix")
-  n <- (n - 1L) * (n > 0L)
+#' @export
+lifegame.default <- function(input = first_gen(), n = 1, ...) {
+  n <- as.integer(n) - 1L
+  lifegame(update_class(input, n), n = n, tidy_results = tidy(input, n))
+}
+
+lifegame.continue <- function(input = first_gen(), n = 1, tidy_results = NULL, ...) {
+  n <- n - 1L
+  output <- next_generation(input)
   lifegame(
-    structure(
-      next_generation(input),
-      class = c(n, "lifegame", "matrix"),
-      results = rbind(attributes(input)$results, tidy_lifegame(input, n))
-    ),
-    n
+    update_class(output, n),
+    n = n,
+    tidy_results = rbind(tidy_results, tidy(output, n))
   )
 }
 
-lifegame.0 <- function(input, n, ...) {
-  structure(
-    input,
-    results = rbind(attributes(input)$results, tidy_lifegame(input, n - 1)),
-    class = c("lifegame", "matrix")
-  )
+lifegame.end <- function(input, n, tidy_results, ...) {
+  tidy_results$generation <-
+    max(tidy_results$generation) - tidy_results$generation + 1L
+  class(tidy_results) <- c("lifegame", class(tidy_results))
+  tidy_results
 }
 
-tidy_lifegame <- function(input, n) {
-  df <- expand.grid(y = 1:nrow(input), x = 1:ncol(input))
-  df$survive <- c(input[nrow(input):1, ])
-  df$n <- n
-  df
+tidy <- function(input, n) {
+  nx <- ncol(input)
+  ny <- nrow(input)
+  x <- 1L:nx
+  y <- 1L:ny
+
+  data.frame(
+    x = rep(x, each = ny),
+    y = rep.int(y, times = nx),
+    generation = n,
+    life = c(input[ny:1L, ])
+  )
 }
 
