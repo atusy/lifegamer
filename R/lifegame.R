@@ -24,7 +24,7 @@ lifegame <- function(input = first_gen(), n = 1, ...) {
 }
 
 #' @export
-lifegame.default <- function(input = first_gen(), n = 1, ...) {
+lifegame.matrix <- function(input = first_gen(), n = 1, ...) {
   n <- as.integer(n) - 1L
   lifegame(update_class(input, n), n = n, tidy_results = tidy(input, n))
 }

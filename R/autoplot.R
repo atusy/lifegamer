@@ -18,11 +18,10 @@ plot.lifegame <- function(x, ...) {
 }
 
 #' @export
-animate <- function(x) {
+animate <- function(x, ...) {
   ggplot2::ggplot(x) +
     ggplot2::aes(.data$x, .data$y, fill = .data$life) +
     ggplot2::geom_raster() +
     ggplot2::coord_fixed() +
-    #gganimate::transition_states(generation)
-    ggplot2::facet_wrap(~ generation)
+    ggplot2::facet_wrap(~ generation, ...)
 }
