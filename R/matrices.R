@@ -1,3 +1,15 @@
+zeros <- function(n) rep(list(0L), n)
+pad <- function(x, top, right, bottom, left) {
+  do.call(
+    cbind,
+    c(
+      zeros(left),
+      do.call(rbind, c(zeros(top), list(x), zeros(bottom))),
+      zeros(right)
+    )
+  )
+}
+
 #' Toy datasets for lifegame
 #'
 #' @name datasets
@@ -25,18 +37,19 @@ frog <- matrix(c(
 
 #' @rdname datasets
 #' @export
-diehard <- cbind(
-  matrix(c(
-    0, 0,
-    1, 1,
-    0, 1
-  ), ncol = 2, byrow = TRUE),
-  0, 0, 0,
-  matrix(c(
-    0, 1, 0,
+diehard <- pad(
+  cbind(
+    matrix(c(
+      0, 0,
+      1, 1,
+      0, 1
+    ), ncol = 2, byrow = TRUE),
     0, 0, 0,
-    1, 1, 1
-  ), ncol = 3, byrow = TRUE)
+    matrix(c(
+      0, 1, 0,
+      0, 0, 0,
+      1, 1, 1
+    ), ncol = 3, byrow = TRUE)
+  ),
+  5L, 5L, 15L, 7L
 )
-diehard <- do.call(rbind, c(rep(list(0L), 5L), list(diehard), rep(list(0L), 15L)))
-diehard <- cbind(0, 0, 0, 0, 0, 0, 0, diehard, 0, 0, 0, 0, 0)
