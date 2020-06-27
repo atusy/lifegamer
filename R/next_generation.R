@@ -1,4 +1,4 @@
-stat_neighbor <- function(x) {
+sum_neighbor <- function(x) {
   .nrow <- nrow(x)
   .ncol <- ncol(x)
 
@@ -24,6 +24,6 @@ survive <- function(x, neighbor = stat_neighbor(x)) {
 }
 
 next_generation <- function(x) {
-  neighbor <- stat_neighbor(x)
+  neighbor <- sum_neighbor(x)
   birth(x, neighbor) + survive(x, neighbor)
 }
