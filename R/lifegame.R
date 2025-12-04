@@ -21,7 +21,7 @@ update_class <- function(x, n) {
 #'
 #' @export
 lifegame <- function(input = first_gen(), n = 1, ...) {
-  UseMethod("lifegame")
+  UseMethod("lifegame", input)
 }
 
 #' @export
