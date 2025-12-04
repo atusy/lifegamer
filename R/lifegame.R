@@ -29,6 +29,7 @@ lifegame.matrix <- function(input = first_gen(), n = 1, ...) {
   lifegame(update_class(input, n), n = n, tidy_results = tidy(input, n))
 }
 
+#' @export
 lifegame.continue <- function(input = first_gen(), n = 1, tidy_results = NULL, ...) {
   n <- n - 1L
   output <- next_generation(input)
@@ -39,6 +40,7 @@ lifegame.continue <- function(input = first_gen(), n = 1, tidy_results = NULL, .
   )
 }
 
+#' @export
 lifegame.end <- function(input, n, tidy_results, ...) {
   tidy_results$generation <-
     max(tidy_results$generation) - tidy_results$generation + 1L
