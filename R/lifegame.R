@@ -1,3 +1,4 @@
+#' @export
 first_gen <- function(nrow=10, ncol=10, p = 0.4) {
   matrix(1 * (runif(nrow * ncol) > (1 - p)), nrow = nrow, ncol = ncol)
 }
