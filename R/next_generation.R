@@ -15,11 +15,11 @@ sum_neighbor <- function(x) {
   down + up + right + left + upright + upleft + downright + downleft
 }
 
-birth <- function(x, neighbor = stat_neighbor(x)) {
+birth <- function(x, neighbor) {
   (neighbor * (x == 0)) == 3
 }
 
-survive <- function(x, neighbor = stat_neighbor(x)) {
+survive <- function(x, neighbor) {
   (neighbor %in% c(2, 3)) * x
 }
 
