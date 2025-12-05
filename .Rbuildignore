@@ -1,2 +1,4 @@
 ^lifegamer\.Rproj$
 ^\.Rproj\.user$
+^README\.qmd$
+^README_files$

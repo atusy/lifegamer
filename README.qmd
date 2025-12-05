@@ -1,0 +1,20 @@
+---
+title: "lifegamer"
+format: gfm
+---
+
+Lifegame implementation in R without `if`-expressions and `for`-loops.`
+
+
+```{r setup}
+#| include: false
+devtools::load_all()
+```
+
+```{r segment10}
+animate(lifegame(first_generation("segment10", 20, 30), 25), ncol = 5)
+```
+
+```{r octagon}
+animate(lifegame(first_generation("octagon", 20, 30), 10), ncol = 5)
+```
