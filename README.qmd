@@ -11,9 +11,15 @@ Lifegame implementation in R without `if`-expressions and `for`-loops.`
 devtools::load_all()
 ```
 
+## Examples
+
+### 10-pixels segment
+
 ```{r segment10}
 animate(lifegame(first_generation("segment10", 20, 30), 25), ncol = 5)
 ```
+
+### Octagon
 
 ```{r octagon}
 animate(lifegame(first_generation("octagon", 20, 30), 10), ncol = 5)
