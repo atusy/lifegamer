@@ -2,7 +2,7 @@
 
 S3method(autoplot,lifegame)
 S3method(first_generation,character)
-S3method(first_generation,grinder)
+S3method(first_generation,grider)
 S3method(first_generation,octagon)
 S3method(first_generation,random)
 S3method(first_generation,segment10)
