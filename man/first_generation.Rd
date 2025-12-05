@@ -2,24 +2,21 @@
 % Please edit documentation in R/first_generation.R
 \name{first_generation}
 \alias{first_generation}
-\alias{first_generation.character}
-\alias{first_generation.random}
-\alias{first_generation.grider}
-\alias{first_generation.segment10}
-\alias{first_generation.octagon}
+\alias{first_generation_random}
+\alias{first_generation_grider}
+\alias{first_generation_segment10}
+\alias{first_generation_octagon}
 \title{Generate First Generation for Cellular Automaton}
 \usage{
 first_generation(kind = first_generation_kinds, ...)
 
-\method{first_generation}{character}(kind = "random", ...)
+first_generation_random(nrow = 50, ncol = 50, p = 0.3, ...)
 
-\method{first_generation}{random}(kind = "random", nrow = 50, ncol = 50, p = 0.3, ...)
+first_generation_grider(nrow = 50, ncol = 50, ...)
 
-\method{first_generation}{grider}(kind = "grider", nrow = 50, ncol = 50, ...)
+first_generation_segment10(...)
 
-\method{first_generation}{segment10}(kind = "segment10", ...)
-
-\method{first_generation}{octagon}(kind = "octagon", ...)
+first_generation_octagon(...)
 }
 \arguments{
 \item{kind}{A character string specifying the type of initial pattern.
