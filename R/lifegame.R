@@ -26,7 +26,12 @@ lifegame.matrix <- function(input = first_generation(), n = 1, ...) {
 }
 
 #' @export
-lifegame.continue <- function(input = first_generation(), n = 1, tidy_results = NULL, ...) {
+lifegame.continue <- function(
+  input = first_generation(),
+  n = 1,
+  tidy_results = NULL,
+  ...
+) {
   n <- n - 1L
   output <- next_generation(input)
   lifegame(
@@ -57,4 +62,3 @@ tidy <- function(input, n) {
     life = c(input[ny:1L, ])
   )
 }
-

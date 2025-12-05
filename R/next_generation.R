@@ -3,7 +3,7 @@ sum_neighbor <- function(x) {
   .ncol <- ncol(x)
 
   up <- rbind(0, x[-.nrow, ])
-  down <- rbind(x[-1,], 0)
+  down <- rbind(x[-1, ], 0)
   right <- cbind(x[, -1], 0)
   left <- cbind(0, x[, -.ncol])
 
