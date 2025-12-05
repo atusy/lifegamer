@@ -1,7 +1,7 @@
 # lifegamer
 
 
-Lifegame implementation in R without `if`-expressions and `for`-loops.\`
+Lifegame implementation in R without `if`-expressions and `for`-loops.
 
 ## Examples
 

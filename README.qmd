@@ -3,7 +3,7 @@ title: "lifegamer"
 format: gfm
 ---
 
-Lifegame implementation in R without `if`-expressions and `for`-loops.`
+Lifegame implementation in R without `if`-expressions and `for`-loops.
 
 
 ```{r setup}
