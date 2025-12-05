@@ -1,8 +1,3 @@
-#' @export
-first_gen <- function(nrow=10, ncol=10, p = 0.4) {
-  matrix(1 * (runif(nrow * ncol) > (1 - p)), nrow = nrow, ncol = ncol)
-}
-
 update_class <- function(x, n) {
   class(x) <- c(c("continue", "end")[c(n > 0L, TRUE)][1L], "matrix")
   x
@@ -20,18 +15,18 @@ update_class <- function(x, n) {
 #'  The `life` column indicates if the cell is dead (`0`) or alive (`1L`).
 #'
 #' @export
-lifegame <- function(input = first_gen(), n = 1, ...) {
+lifegame <- function(input = first_generation(), n = 1, ...) {
   UseMethod("lifegame", input)
 }
 
 #' @export
-lifegame.matrix <- function(input = first_gen(), n = 1, ...) {
+lifegame.matrix <- function(input = first_generation(), n = 1, ...) {
   n <- as.integer(n) - 1L
   lifegame(update_class(input, n), n = n, tidy_results = tidy(input, n))
 }
 
 #' @export
-lifegame.continue <- function(input = first_gen(), n = 1, tidy_results = NULL, ...) {
+lifegame.continue <- function(input = first_generation(), n = 1, tidy_results = NULL, ...) {
   n <- n - 1L
   output <- next_generation(input)
   lifegame(

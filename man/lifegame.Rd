@@ -4,7 +4,7 @@
 \alias{lifegame}
 \title{Lifegame}
 \usage{
-lifegame(input = first_gen(), n = 1, ...)
+lifegame(input = first_generation(), n = 1, ...)
 }
 \arguments{
 \item{input}{An matrix composed of \code{0L} and \code{1L}.}
