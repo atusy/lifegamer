@@ -32,13 +32,10 @@ first_generation_kinds = c("random", "grider", "segment10", "octagon")
 #' @export
 #' @rdname first_generation
 first_generation <- function(kind = first_generation_kinds, ...) {
-  UseMethod("first_generation", kind)
-}
-
-#' @export
-#' @rdname first_generation
-first_generation.character <- function(kind = "random", ...) {
-  first_generation(structure(kind, class = kind[1L]), ...)
+  do.call(
+    paste0("first_generation_", kind[1L]),
+    args = list(...)
+  )
 }
 
 #' @param nrow Number of rows in the grid (default: 50).
@@ -47,7 +44,7 @@ first_generation.character <- function(kind = "random", ...) {
 #'
 #' @export
 #' @rdname first_generation
-first_generation.random <- function(kind = "random", nrow = 50, ncol = 50, p = 0.3, ...) {
+first_generation_random <- function(nrow = 50, ncol = 50, p = 0.3, ...) {
   x <- 1 * (runif(nrow * ncol) > (1 - p))
   dim(x) <- c(ncol, nrow) # because x will be transposed
   t(x)
@@ -59,7 +56,7 @@ first_generation.random <- function(kind = "random", nrow = 50, ncol = 50, p = 0
 #'
 #' @export
 #' @rdname first_generation
-first_generation.grider <- function(kind = "grider", nrow = 50, ncol = 50, ...) {
+first_generation_grider <- function(nrow = 50, ncol = 50, ...) {
   x <- rep(0L, nrow * ncol)
   dim(x) <- c(nrow, ncol)
   x[1, 1:3] <- c(0, 1, 0)
@@ -74,7 +71,7 @@ first_generation.grider <- function(kind = "grider", nrow = 50, ncol = 50, ...) 
 #'
 #' @export
 #' @rdname first_generation
-first_generation.segment10 <- function(kind = "segment10", ...) {
+first_generation_segment10 <- function(...) {
   nr <- 11
   nc <- 18
   x <- rep(0, nr * nc)
@@ -89,7 +86,8 @@ first_generation.segment10 <- function(kind = "segment10", ...) {
 #'
 #' @export
 #' @rdname first_generation
-first_generation.octagon <- function(kind = "octagon", ...) {
+first_generation_octagon <- function(...) {
+  # fmt: skip
   x <- c(0, 0, 0, 1, 1, 0, 0, 0,
          0, 0, 1, 0, 0, 1, 0, 0,
          0, 1, 0, 0, 0, 0, 1, 0,
@@ -101,4 +99,3 @@ first_generation.octagon <- function(kind = "octagon", ...) {
   dim(x) <- c(8, 8)
   t(x)
 }
-
