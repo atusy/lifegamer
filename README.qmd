@@ -16,11 +16,11 @@ devtools::load_all()
 ### 10-pixels segment
 
 ```{r segment10}
-animate(lifegame(first_generation("segment10", 20, 30), 25), ncol = 5)
+animate(lifegame(first_generation_segment10(), 25), ncol = 5)
 ```
 
 ### Octagon
 
 ```{r octagon}
-animate(lifegame(first_generation("octagon", 20, 30), 10), ncol = 5)
+animate(lifegame(first_generation_octagon(), 10), ncol = 5)
 ```
